@@ -1,0 +1,20 @@
+apiVersion: operator.aquasec.com/v1alpha1
+kind: AquaGateway
+metadata:
+  name: aqua
+spec:
+  requirements: false
+  serviceAccount: aqua-sa
+  dbSecretName: aqua-database-password
+  dbSecretKey: db-password
+  deploy:
+    replicas: 1
+    service: ClusterIP
+    image:
+      repository: gateway
+      registry: registry.aquasec.com
+      tag: '3.5'
+      pullpolicy: IfNotPresent
+  aquaDb: aqua-database
+  ssl: false
+  auditSsl: false

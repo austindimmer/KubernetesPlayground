@@ -1,0 +1,20 @@
+apiVersion: operator.aquasec.com/v1alpha1
+kind: AquaDatabase
+metadata:
+  name: aqua
+spec:
+  requirements: true
+  password: password
+  registry:
+    url: registry.aquasec.com
+    username: example@gmail.com
+    password: ''
+    email: example@gmail.com
+  deploy:
+    replicas: 1
+    service: ClusterIP
+    image:
+      repository: database
+      registry: registry.aquasec.com
+      tag: '4.0'
+      pullpolicy: IfNotPresent

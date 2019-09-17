@@ -1,0 +1,28 @@
+apiVersion: operator.aquasec.com/v1alpha1
+kind: AquaServer
+metadata:
+  name: aqua
+spec:
+  requirements: false
+  add: false
+  serviceAccount: aqua-sa
+  dbSecretName: aqua-database-password
+  dbSecretKey: db-password
+  rbac:
+    enable: true
+    privileged: true
+  deploy:
+    replicas: 1
+    service: LoadBalancer
+    image:
+      repository: console
+      registry: registry.aquasec.com
+      tag: '3.5'
+      pullPolicy: IfNotPresent
+  aquaDb: aqua-database
+  adminPassword: Password1
+  licenseToken: null
+  clusterMode: true
+  ssl: false
+  auditSsl: false
+  dockerless: false
