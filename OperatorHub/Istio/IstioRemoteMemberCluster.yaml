@@ -1,0 +1,28 @@
+apiVersion: istio.banzaicloud.io/v1beta1
+kind: RemoteIstio
+metadata:
+  name: remoteistio-sample
+spec:
+  autoInjectionNamespaces:
+    - default
+  citadel:
+    enabled: true
+    replicaCount: 1
+  enabledServices:
+    - labelSelector: istio=pilot
+      name: istio-pilot
+    - labelSelector: istio-mixer-type=policy
+      name: istio-policy
+    - labelSelector: statsd-prom-bridge
+      name: istio-statsd
+    - labelSelector: istio-mixer-type=telemetry
+      name: istio-telemetry
+    - labelSelector: app=jaeger
+      name: zipkin
+  includeIPRanges: '*'
+  proxy: {}
+  proxyInit: {}
+  sidecarInjector:
+    enabled: true
+    initCNIConfiguration: {}
+    replicaCount: 1
